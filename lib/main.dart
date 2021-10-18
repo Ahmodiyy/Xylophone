@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -34,14 +35,23 @@ class _MyXylophoneState extends State<MyXylophone> {
     );
   }
 
-  Expanded buildKey({Color? color, int? number}) {
+  Expanded buildKey({Color? color, required int number}) {
     return Expanded(
       child: TextButton(
         child: Container(
           color: color,
         ),
-        onPressed: () {},
+        onPressed: () {
+          playSound(number);
+        },
       ),
     );
+  }
+
+  void playSound(int num) async {
+    AudioCache audioCache = AudioCache(prefix: 'assets/');
+    audioCache.play('assets_note$num.wav');
+    // AudioPlayer audioPlayer = AudioPlayer();
+    // audioPlayer.play('assets/assets_note$num.wav');
   }
 }
